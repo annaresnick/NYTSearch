@@ -10,12 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.aresnick.nytimessearch.Article;
 import com.example.aresnick.nytimessearch.ArticleAdapter;
@@ -43,6 +43,7 @@ public class SearchActivity extends AppCompatActivity {
     ArticleAdapter adapter;
     String query;
 
+
     private ShareActionProvider mShareActionProvider;
     StaggeredGridLayoutManager staggeredGridLayoutManager;
 
@@ -52,6 +53,9 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         setupViews();
         ButterKnife.bind(this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         // Add the scroll listener
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL);
@@ -122,7 +126,6 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String q) {
                 searchView.clearFocus();
-                Toast.makeText(SearchActivity.this, query, Toast.LENGTH_LONG).show();
                 query = q;
                 onArticleSearch(searchView);
                 return true;
@@ -180,10 +183,8 @@ public class SearchActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        Toast.makeText(this, id, Toast.LENGTH_LONG).show();
         //Log.d(1, "hey");
         if(id == R.id.miRequest) {
-            Toast.makeText(this, "pressed", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -232,7 +233,6 @@ public class SearchActivity extends AppCompatActivity {
         // Deserialize API response and then construct new objects to append to the adapter
         // Add the new objects to the data source for the adapter
 
-        Toast.makeText(this, "Searching for" + query, Toast.LENGTH_LONG).show();
         AsyncHttpClient client = new AsyncHttpClient();
         String url = "http://api.nytimes.com/svc/search/v2/articlesearch.json";
 

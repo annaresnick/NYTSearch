@@ -27,7 +27,7 @@ public class ArticleActivity extends AppCompatActivity {
         RecyclerView rvArticle = (RecyclerView) findViewById(R.id.rvArticles);
         setContentView(R.layout.activity_article);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-   //     setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
 
         Article article = (Article) getIntent().getSerializableExtra("article");
 
